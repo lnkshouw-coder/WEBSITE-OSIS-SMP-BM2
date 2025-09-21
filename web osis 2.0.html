@@ -1,0 +1,315 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Voraciexel OSIS 2024/2025</title>
+  <style>
+    /* Reset & base styles */
+    * {
+      margin: 0; padding: 0; box-sizing: border-box;
+      font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    }
+    body {
+      background: linear-gradient(135deg, #1e2a78, #3a55c4);
+      color: #f8f8f8;
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      padding-bottom: 3rem;
+    }
+    header {
+      width: 100%;
+      padding: 2rem 1rem;
+      background: rgba(0, 0, 0, 0.3);
+      backdrop-filter: blur(10px);
+      text-align: center;
+      border-bottom: 2px solid #4aa1f3;
+      position: sticky;
+      top: 0;
+      z-index: 10;
+      animation: fadeInDown 1s ease forwards;
+    }
+    header h1 {
+      font-size: 2.5rem;
+      letter-spacing: 0.15em;
+      color: #7ed6ff;
+      animation: glow 2.5s ease-in-out infinite alternate;
+    }
+
+    @keyframes glow {
+      from { text-shadow: 0 0 10px #42aaff99, 0 0 20px #42aaffbb; }
+      to { text-shadow: 0 0 25px #64c7ffee, 0 0 40px #32a0ffcc; }
+    }
+    @keyframes fadeInDown {
+      from { opacity: 0; transform: translateY(-30px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+
+    main {
+      width: 90%;
+      max-width: 900px;
+      padding: 2rem 0 3rem;
+      flex-grow: 1;
+    }
+    section {
+      margin-bottom: 3rem;
+      background: rgba(255, 255, 255, 0.05);
+      border-radius: 15px;
+      padding: 2rem;
+      box-shadow: 0 0 20px #FFFFFF22;
+      backdrop-filter: blur(5px);
+      transition: box-shadow 0.3s ease;
+    }
+    section:hover, section:focus-within {
+      box-shadow: 0 0 40px #64c7ffcc;
+      outline: none;
+    }
+    section h2 {
+      margin-bottom: 1rem;
+      color: #a6d2ff;
+      font-size: 1.8rem;
+      border-bottom: 2px solid #4aa1f3;
+      padding-bottom: 0.5rem;
+      letter-spacing: 0.1em;
+      user-select: none;
+    }
+    .cards {
+      display: flex;
+      gap: 2rem;
+      flex-wrap: wrap;
+      justify-content: center;
+    }
+    .card {
+      background: #3a55c4cc;
+      border-radius: 12px;
+      padding: 1.5rem;
+      width: 280px;
+      color: #e1eaff;
+      box-shadow: 0 8px 20px #00000066;
+      cursor: default;
+      transition: transform 0.3s ease, box-shadow 0.3s ease;
+    }
+    .card:hover, .card:focus {
+      transform: translateY(-12px) scale(1.05);
+      box-shadow: 0 20px 40px #007bffcc;
+      outline: none;
+    }
+    .card h3 {
+      margin-bottom: 0.8rem;
+      color: #bbdefb;
+    }
+    .card p {
+      font-size: 0.95rem;
+      line-height: 1.3;
+    }
+
+    /* Agenda */
+    .agenda-text {
+      font-size: 1.1rem;
+      color: #d0e2ffbb;
+      padding: 1.5rem;
+      border-left: 6px solid #4aa1f3;
+      font-style: italic;
+      user-select: none;
+      background: #2d4a8d99;
+      border-radius: 12px;
+      max-width: 650px;
+      margin: 0 auto;
+      box-shadow: 0 0 20px #64a1f4bb;
+      transition: background 0.3s ease;
+    }
+    .agenda-text:hover, .agenda-text:focus {
+      background: #4a6acf;
+      outline: none;
+    }
+
+    /* Form */
+    form {
+      max-width: 520px;
+      margin: 0 auto;
+      display: flex;
+      flex-direction: column;
+      gap: 1.2rem;
+    }
+    input[type="text"], input[type="email"], textarea {
+      padding: 0.8rem 1rem;
+      border-radius: 10px;
+      border: none;
+      font-size: 1rem;
+      resize: vertical;
+      background: #1e2a78cc;
+      color: #d7e8ff;
+      box-shadow: inset 0 0 15px #4aa1f3bb;
+      transition: box-shadow 0.3s ease, background-color 0.3s ease;
+    }
+    input[type="text"]:focus, input[type="email"]:focus, textarea:focus {
+      outline: none;
+      box-shadow: 0 0 18px #6fb4ffdd;
+      background: #2a3c8ecc;
+    }
+    button {
+      background: #4aa1f3;
+      color: white;
+      border: none;
+      font-weight: 600;
+      padding: 0.8rem 1rem;
+      border-radius: 10px;
+      cursor: pointer;
+      transition: background-color 0.3s ease, box-shadow 0.3s ease;
+      box-shadow: 0 8px 15px #1f409eaa;
+      user-select: none;
+      font-size: 1.1rem;
+      max-width: 200px;
+      align-self: center;
+    }
+    button:hover, button:focus {
+      background-color: #3781d6;
+      box-shadow: 0 10px 20px #1965cbcc;
+      outline: none;
+    }
+    button:active {
+      transform: scale(0.97);
+      box-shadow: 0 8px 15px #13488bcc;
+    }
+
+    #success-message {
+      margin-top: 1rem;
+      padding: 1rem;
+      background-color: #dff0d8;
+      border: 1px solid #3c763d;
+      color: #3c763d;
+      border-radius: 10px;
+      text-align: center;
+      display: none;
+    }
+    #back-button {
+      margin-top: 1rem;
+      background-color: #4aa1f3;
+      color: white;
+      border: none;
+      cursor: pointer;
+      padding: 0.8rem 1.4rem;
+      border-radius: 10px;
+      font-size: 1rem;
+      display: none;
+      user-select: none;
+    }
+    #back-button:hover {
+      background-color: #3781d6;
+    }
+
+    footer {
+      width: 100%;
+      background: #162451;
+      text-align: center;
+      padding: 1rem 0;
+      font-size: 0.9rem;
+      color: #405a9e;
+      border-top: 1px solid #3a55c4;
+      user-select: none;
+      letter-spacing: 0.05em;
+      margin-top: auto;
+    }
+
+    /* Responsive */
+    @media (max-width: 600px) {
+      header h1 {
+        font-size: 1.8rem;
+      }
+      .cards {
+        flex-direction: column;
+        gap: 1.5rem;
+      }
+      button, #back-button {
+        max-width: 100%;
+      }
+    }
+  </style>
+</head>
+<body>
+
+<header>
+  <h1>VORACIEXEL OSIS 2024/2025</h1>
+</header>
+
+<main>
+  <section>
+    <h2>Tentang Voraciexel</h2>
+    <div class="cards">
+      <div class="card" tabindex="0">
+        <h3>Visi</h3>
+        <p>Membangun karakter siswa melalui kepemimpinan dan kreativitas.</p>
+      </div>
+      <div class="card" tabindex="0">
+        <h3>Misi</h3>
+        <p>Menjadi wadah aspirasi dan inovasi bagi seluruh siswa SMP.</p>
+      </div>
+      <div class="card" tabindex="0">
+        <h3>Nilai</h3>
+        <p>Integritas, kerjasama, dan keberanian berinovasi.</p>
+      </div>
+    </div>
+  </section>
+
+  <section>
+    <h2>Agenda Kegiatan</h2>
+    <div class="agenda-text" aria-live="polite" aria-atomic="true" role="region">
+      📅 Kalender kegiatan OSIS Voraciexel akan diumumkan secara berkala dan update.
+    </div>
+  </section>
+
+  <section>
+    <h2>Aspirasi & Kontak</h2>
+    <form id="aspirasi-form" action="https://formspree.io/f/mzbdlwlb" method="POST">
+      <input type="text" name="nama" placeholder="Nama lengkap" required />
+      <input type="email" name="email" placeholder="Email (opsional)" />
+      <textarea name="aspirasi" placeholder="Tulis aspirasi atau pesanmu di sini..." rows="4" required></textarea>
+      <button type="submit">Kirim Aspirasi</button>
+    </form>
+    <div id="success-message">Aspirasi Anda berhasil terkirim.</div>
+    <button id="back-button" onclick="backToForm()">Kembali ke Halaman Utama</button>
+  </section>
+</main>
+
+<footer>
+  &copy; 2024 Voraciexel OSIS | Semua hak cipta dilindungi
+</footer>
+
+<script>
+  const form = document.getElementById('aspirasi-form');
+  const successMessage = document.getElementById('success-message');
+  const backButton = document.getElementById('back-button');
+
+  form.addEventListener('submit', function(e) {
+    e.preventDefault();
+    fetch(form.action, {
+      method: form.method,
+      body: new FormData(form),
+      headers: {
+        'Accept': 'application/json'
+      }
+    }).then(response => {
+      if (response.ok) {
+        form.style.display = 'none';
+        successMessage.style.display = 'block';
+        backButton.style.display = 'inline-block';
+      } else {
+        alert('Terjadi kesalahan saat mengirim aspirasi. Silakan coba lagi.');
+      }
+    }).catch(() => {
+      alert('Terjadi kesalahan saat mengirim aspirasi. Silakan coba lagi.');
+    });
+  });
+
+  function backToForm() {
+    form.style.display = 'flex';
+    successMessage.style.display = 'none';
+    backButton.style.display = 'none';
+    form.reset();
+  }
+</script>
+
+</body>
+</html>
